@@ -1,0 +1,98 @@
+<configuration>
+
+
+
+    <property name="log.base" value="/var/logs/kafka_storm"/>
+    <property name="pattern"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sessionId}] %-5level [%thread] %logger{80} :%msg%n"/>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <!--ppaySettlement根-->
+    <appender name="root"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/Cosmetics-root.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/Cosmetics-root-%i.%d{yyyy-MM-dd}.log.gz
+            </fileNamePattern>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>30MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="exception"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/Cosmetics-exception.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/Cosmetics-exception-%i.%d{yyyy-MM-dd}.log.gz
+            </fileNamePattern>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>30MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="OfficialWebSite-cut" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/Cosmetics-cut.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/Cosmetics-cut-%i.%d{yyyy-MM-dd}.log.gz
+            </fileNamePattern>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>30MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志过滤 -->
+    <logger name="org.springframework">
+        <level value="debug"/>
+    </logger>
+    <logger name="java.sql">
+        <level value="error"/>
+    </logger>
+    <logger name="org.apache">
+        <level value="debug"/>
+    </logger>
+
+    <logger name="jdbc.sqltiming">
+        <level value="debug"/>
+    </logger>
+    <logger name="jdbc.sqlonly">
+        <level value="OFF"/>
+    </logger>
+    <logger name="jdbc.audit">
+        <level value="OFF"/>
+    </logger>
+    <logger name="jdbc.resultset">
+        <level value="OFF"/>
+    </logger>
+    <logger name="jdbc.connection">
+        <level value="OFF"/>
+    </logger>
+
+    <logger name="org.springframework.jms.listener.DefaultMessageListenerContainer" level="error" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- root级别控制 -->
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="root"/>
+    </root>
+</configuration>

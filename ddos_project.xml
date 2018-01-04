@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ddos_project" default="all">
+  
+  
+  <property file="ddos_project.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.7" value="${jdk.home.1.7}/bin"/>
+  <path id="jdk.classpath.1.7">
+    <fileset dir="${jdk.home.1.7}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.7}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.7}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.7"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.maven:_com.101tec:zkclient:0.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/101tec/zkclient/0.3/zkclient-0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.esotericsoftware:kryo:3.0.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/esotericsoftware/kryo/3.0.3/kryo-3.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.esotericsoftware:minlog:1.3.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.esotericsoftware:reflectasm:1.10.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/esotericsoftware/reflectasm/1.10.1/reflectasm-1.10.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.8.5/jackson-annotations-2.8.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.8.5/jackson-core-2.8.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.8.5/jackson-databind-2.8.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.8.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/jaxrs/jackson-jaxrs-base/2.8.5/jackson-jaxrs-base-2.8.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.8.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/jaxrs/jackson-jaxrs-json-provider/2.8.5/jackson-jaxrs-json-provider-2.8.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.8.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.8.5/jackson-module-jaxb-annotations-2.8.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.code.findbugs:jsr305:1.3.9.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.guava:guava:18.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/guava/guava/18.0/guava-18.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.http-client:google-http-client:1.21.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/google/http-client/google-http-client/1.21.0/google-http-client-1.21.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.googlecode.json-simple:json-simple:1.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/googlecode/json-simple/json-simple/1.1/json-simple-1.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.lmax:disruptor:3.3.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/lmax/disruptor/3.3.2/disruptor-3.3.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.maxmind.db:maxmind-db:1.2.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/maxmind/db/maxmind-db/1.2.0/maxmind-db-1.2.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.maxmind.geoip2:geoip2:2.6.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/maxmind/geoip2/geoip2/2.6.0/geoip2-2.6.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.spatial4j:spatial4j:0.4.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/spatial4j/spatial4j/0.4.1/spatial4j-0.4.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.yammer.metrics:metrics-core:2.2.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/yammer/metrics/metrics-core/2.2.0/metrics-core-2.2.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-codec:commons-codec:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-codec/commons-codec/1.3/commons-codec-1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-io:commons-io:2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-io/commons-io/2.5/commons-io-2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-lang:commons-lang:2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-lang/commons-lang/2.5/commons-lang-2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-logging:commons-logging:1.1.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty:3.7.0.final.classpath">
+    <pathelement location="${path.variable.maven_repository}/io/netty/netty/3.7.0.Final/netty-3.7.0.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_javax.servlet:servlet-api:2.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_jline:jline:0.9.94.classpath">
+    <pathelement location="${path.variable.maven_repository}/jline/jline/0.9.94/jline-0.9.94.jar"/>
+  </path>
+  
+  <path id="library.maven:_junit:junit:4.12.classpath">
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.jpountz.lz4:lz4:1.2.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/jpountz/lz4/lz4/1.2.0/lz4-1.2.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_net.sf.jopt-simple:jopt-simple:3.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/net/sf/jopt-simple/jopt-simple/3.2/jopt-simple-3.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.antlr:antlr-runtime:3.5.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/antlr/antlr-runtime/3.5/antlr-runtime-3.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.commons:commons-lang3:3.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.commons:commons-pool2:2.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/commons/commons-pool2/2.3/commons-pool2-2.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.curator:curator-client:2.10.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/curator/curator-client/2.10.0/curator-client-2.10.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.curator:curator-framework:2.10.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/curator/curator-framework/2.10.0/curator-framework-2.10.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/httpcomponents/httpclient/4.0.1/httpclient-4.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.kafka:kafka-clients:0.8.2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/kafka/kafka-clients/0.8.2.1/kafka-clients-0.8.2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.kafka:kafka_2.9.2:0.8.2.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/kafka/kafka_2.9.2/0.8.2.2/kafka_2.9.2-0.8.2.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-api:2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-api/2.1/log4j-api-2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-core:2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-core/2.1/log4j-core-2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.logging.log4j:log4j-slf4j-impl:2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/logging/log4j/log4j-slf4j-impl/2.1/log4j-slf4j-impl-2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-analyzers-common:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-analyzers-common/4.10.3/lucene-analyzers-common-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-core:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-core/4.10.3/lucene-core-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-grouping:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-grouping/4.10.3/lucene-grouping-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-highlighter:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-highlighter/4.10.3/lucene-highlighter-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-join:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-join/4.10.3/lucene-join-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-memory:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-memory/4.10.3/lucene-memory-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-misc:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-misc/4.10.3/lucene-misc-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-queries:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-queries/4.10.3/lucene-queries-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-queryparser:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-queryparser/4.10.3/lucene-queryparser-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-sandbox:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-sandbox/4.10.3/lucene-sandbox-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-spatial:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-spatial/4.10.3/lucene-spatial-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.lucene:lucene-suggest:4.10.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/lucene/lucene-suggest/4.10.3/lucene-suggest-4.10.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.storm:storm-core:1.0.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/storm/storm-core/1.0.2/storm-core-1.0.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.storm:storm-kafka:1.0.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/storm/storm-kafka/1.0.2/storm-kafka-1.0.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.storm:storm-redis:1.0.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/storm/storm-redis/1.0.2/storm-redis-1.0.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.zookeeper:zookeeper:3.4.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.clojure:clojure:1.7.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/clojure/clojure/1.7.0/clojure-1.7.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.elasticsearch:elasticsearch:1.4.4.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/elasticsearch/elasticsearch/1.4.4/elasticsearch-1.4.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.elasticsearch:geolite2-databases:20151029.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/elasticsearch/geolite2-databases/20151029/geolite2-databases-20151029.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.objenesis:objenesis:2.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/objenesis/objenesis/2.1/objenesis-2.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm-commons:4.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/ow2/asm/asm-commons/4.1/asm-commons-4.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm:4.1.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/ow2/asm/asm/4.1/asm-4.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.scala-lang:scala-library:2.9.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/scala-lang/scala-library/2.9.2/scala-library-2.9.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:log4j-over-slf4j:1.6.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/slf4j/log4j-over-slf4j/1.6.6/log4j-over-slf4j-1.6.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:slf4j-api:1.7.7.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.xerial.snappy:snappy-java:1.1.1.6.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/xerial/snappy/snappy-java/1.1.1.6/snappy-java-1.1.1.6.jar"/>
+  </path>
+  
+  <path id="library.maven:_redis.clients:jedis:2.7.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/redis/clients/jedis/2.7.0/jedis-2.7.0.jar"/>
+  </path>
+  
+  
+  <!-- Application Server Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/module_ddos_project.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.ddos_project" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.ddos_project" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.ddos_project:jar" value="${basedir}/out/artifacts/ddos_project_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.ddos_project.jar" value="${artifacts.temp.dir}/ddos_project.jar"/>
+  </target>
+  
+  <target name="artifact.ddos_project:jar" depends="init.artifacts, compile.module.ddos_project" description="Build &#39;ddos_project:jar&#39; artifact">
+    <property name="artifact.temp.output.ddos_project:jar" value="${artifacts.temp.dir}/ddos_project_jar"/>
+    <mkdir dir="${artifact.temp.output.ddos_project:jar}"/>
+    <jar destfile="${temp.jar.path.ddos_project.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${ddos_project.output.dir}"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/zookeeper/zookeeper/3.4.6/zookeeper-3.4.6.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/commons-io/commons-io/2.5/commons-io-2.5.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-queryparser/4.10.3/lucene-queryparser-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-highlighter/4.10.3/lucene-highlighter-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/jaxrs/jackson-jaxrs-json-provider/2.8.5/jackson-jaxrs-json-provider-2.8.5.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/elasticsearch/geolite2-databases/20151029/geolite2-databases-20151029.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/curator/curator-client/2.10.0/curator-client-2.10.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-core/4.10.3/lucene-core-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/101tec/zkclient/0.3/zkclient-0.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/spatial4j/spatial4j/0.4.1/spatial4j-0.4.1.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/io/netty/netty/3.7.0.Final/netty-3.7.0.Final.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-misc/4.10.3/lucene-misc-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/googlecode/json-simple/json-simple/1.1/json-simple-1.1.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/jaxrs/jackson-jaxrs-base/2.8.5/jackson-jaxrs-base-2.8.5.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/maxmind/db/maxmind-db/1.2.0/maxmind-db-1.2.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/net/sf/jopt-simple/jopt-simple/3.2/jopt-simple-3.2.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.8.5/jackson-module-jaxb-annotations-2.8.5.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/httpcomponents/httpclient/4.0.1/httpclient-4.0.1.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/yammer/metrics/metrics-core/2.2.0/metrics-core-2.2.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/xerial/snappy/snappy-java/1.1.1.6/snappy-java-1.1.1.6.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-suggest/4.10.3/lucene-suggest-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/commons-lang/commons-lang/2.5/commons-lang-2.5.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-memory/4.10.3/lucene-memory-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/ow2/asm/asm-commons/4.1/asm-commons-4.1.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/jline/jline/0.9.94/jline-0.9.94.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/google/http-client/google-http-client/1.21.0/google-http-client-1.21.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/commons/commons-pool2/2.3/commons-pool2-2.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/google/guava/guava/18.0/guava-18.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/kafka/kafka-clients/0.8.2.1/kafka-clients-0.8.2.1.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/redis/clients/jedis/2.7.0/jedis-2.7.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-queries/4.10.3/lucene-queries-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-sandbox/4.10.3/lucene-sandbox-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-spatial/4.10.3/lucene-spatial-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/maxmind/geoip2/geoip2/2.6.0/geoip2-2.6.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/kafka/kafka_2.9.2/0.8.2.2/kafka_2.9.2-0.8.2.2.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/elasticsearch/elasticsearch/1.4.4/elasticsearch-1.4.4.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/storm/storm-redis/1.0.2/storm-redis-1.0.2.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/ow2/asm/asm/4.1/asm-4.1.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/net/jpountz/lz4/lz4/1.2.0/lz4-1.2.0.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/commons-codec/commons-codec/1.3/commons-codec-1.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.8.5/jackson-databind-2.8.5.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-analyzers-common/4.10.3/lucene-analyzers-common-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-grouping/4.10.3/lucene-grouping-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/scala-lang/scala-library/2.9.2/scala-library-2.9.2.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/storm/storm-kafka/1.0.2/storm-kafka-1.0.2.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.8.5/jackson-annotations-2.8.5.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/antlr/antlr-runtime/3.5/antlr-runtime-3.5.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/lucene/lucene-join/4.10.3/lucene-join-4.10.3.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.8.5/jackson-core-2.8.5.jar"/>
+      <zipfileset src="${path.variable.maven_repository}/org/apache/curator/curator-framework/2.10.0/curator-framework-2.10.0.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.ddos_project.jar}" tofile="${artifact.temp.output.ddos_project:jar}/ddos_project.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.ddos_project:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.ddos_project:jar}"/>
+    <copy todir="${artifact.output.ddos_project:jar}">
+      <fileset dir="${artifact.temp.output.ddos_project:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
